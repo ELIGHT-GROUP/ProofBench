@@ -1,8 +1,9 @@
+import { Button } from "@/components/ui/button"
 
 
 const App = () => {
     return (
-        <div>App</div>
+        <div>App<Button>Click me</Button></div>
     )
 }
 
