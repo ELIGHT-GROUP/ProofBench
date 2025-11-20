@@ -111,7 +111,7 @@ export const DashboardSidebar = ({ isOpen, onClose }: DashboardSidebarProps) => 
                             className="flex items-center gap-3 px-3 py-2.5 text-sm font-medium transition-colors"
                         >
                             <Image
-                                src="https://avatars.githubusercontent.com/u/197804864?s=200&v=4"
+                                src="/elight.png"
                                 alt="Elight-Group"
                                 width={40}
                                 height={40}
