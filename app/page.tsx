@@ -1,51 +1,34 @@
 'use client'
 
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
-import { useAuth } from "@/contexts/auth"
+import Logo from "@/components/shared/Logo"
+import { FlickeringGrid } from "@/components/ui/shadcn-io/flickering-grid"
+import { Navbar03 } from "@/components/ui/shadcn-io/navbar-03"
+import { Navlinks } from "@/constants/navlinks"
+import { useRouter } from "next/navigation"
 
 const LandingPage = () => {
-  const { user } = useAuth()
+
+  const router = useRouter()
+
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-gray-50 to-white">
-      <div className="max-w-4xl mx-auto text-center px-4">
-        <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-          Welcome to ProofBench
-        </h1>
-        <p className="text-xl text-gray-600 mb-8">
-          Your platform for learning and testing. Get started today!
-        </p>
-        
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          {user ? (
-            <Link href="/dashboard">
-              <Button size="lg" className="text-lg px-8 py-3">
-                Go to Dashboard
-              </Button>
-            </Link>
-          ) : (
-            <Link href="/login">
-              <Button size="lg" className="text-lg px-8 py-3">
-                Get Started
-              </Button>
-            </Link>
-          )}
-          
-          <Link href="/about-us">
-            <Button variant="outline" size="lg" className="text-lg px-8 py-3">
-              Learn More
-            </Button>
-          </Link>
+    <div>
+      <div className="relative min-h-screen w-full overflow-hidden flex justify-center items-center">
+        {/* Layer 1: Background Component */}
+        <FlickeringGrid
+          className="z-0 absolute inset-0 size-full"
+          squareSize={10}
+          gridGap={6}
+          color="#ffaa00"
+          maxOpacity={0.5}
+          flickerChance={0.1}
+        />
+
+        {/* Layer 2: Foreground Content Layer - ready for text and other components */}
+        <div className="max-w-6xl w-full min-h-screen relative z-10 bg-background">
+          <Navbar03 logo={<Logo />} navigationLinks={Navlinks} onCtaClick={() => router.push('/login')} />
         </div>
       </div>
-      
-      <footer className="mt-auto py-8 text-center text-gray-500">
-        <nav className="space-x-6">
-          <Link href="/about-us" className="hover:text-gray-700">About Us</Link>
-          <Link href="/terms" className="hover:text-gray-700">Terms</Link>
-        </nav>
-      </footer>
     </div>
   )
 }
