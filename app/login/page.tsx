@@ -8,6 +8,7 @@ import Link from "next/link"
 import Logo from '@/components/shared/Logo'
 import Image from 'next/image'
 import { FlickeringGrid } from '@/components/ui/shadcn-io/flickering-grid'
+import PageLoader from '@/components/shared/PageLoader'
 
 export default function LoginPage() {
   const { user, loading, signInWithGoogle } = useAuth()
@@ -21,11 +22,7 @@ export default function LoginPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-primary">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-10 w-10 border-4 border-primary-foreground border-t-transparent mx-auto"></div>
-        </div>
-      </div>
+      <PageLoader />
     )
   }
 
@@ -50,7 +47,9 @@ export default function LoginPage() {
         {/* Content Container */}
         <div className="relative z-10 flex flex-col justify-between w-full p-12">
           {/* Logo at top */}
-          <Logo />
+          <Link href="/">
+            <Logo className="text-background" />
+          </Link>
 
           {/* Testimonial at bottom */}
           <div className="">
