@@ -3,35 +3,35 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
-import { FileText, Home, User, X } from 'lucide-react'
+import { X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import Logo from '@/components/shared/Logo'
+import { useAdminMode } from '@/contexts/admin-mode'
+import { useAuth } from '@/contexts/auth'
+import { menuItems, adminMenuItems } from '@/constants/dashboard'
+import { Badge } from '@/components/ui/badge'
+import Image from 'next/image'
 
 interface DashboardSidebarProps {
     isOpen: boolean
     onClose: () => void
 }
 
-const menuItems = [
-    {
-        title: 'Dashboard',
-        href: '/dashboard',
-        icon: Home,
-    },
-    {
-        title: 'Test',
-        href: '/dashboard/test',
-        icon: FileText,
-    },
-    {
-        title: 'Profile',
-        href: '/dashboard/profile',
-        icon: User,
-    },
-]
-
 export const DashboardSidebar = ({ isOpen, onClose }: DashboardSidebarProps) => {
     const pathname = usePathname()
+    const { adminModeEnabled } = useAdminMode()
+    const { profile, hasRole } = useAuth()
+
+    // Filter admin menu items based on user role
+    const visibleAdminItems = adminMenuItems.filter(item => {
+        if (!item.requiredRoles) return true
+        return hasRole(item.requiredRoles)
+    })
+
+    // Combine menu items: regular items + admin items (if admin mode is enabled)
+    const allMenuItems = adminModeEnabled
+        ? [...menuItems, ...visibleAdminItems]
+        : menuItems
 
     return (
         <>
@@ -53,7 +53,9 @@ export const DashboardSidebar = ({ isOpen, onClose }: DashboardSidebarProps) => 
                 <div className="flex h-full flex-col">
                     {/* Header */}
                     <div className="flex h-16 items-center justify-between border-b px-6">
-                        <Logo />
+                        <div className="flex items-center gap-2">
+                            <Logo />
+                        </div>
                         <Button
                             variant="ghost"
                             size="icon"
@@ -67,7 +69,7 @@ export const DashboardSidebar = ({ isOpen, onClose }: DashboardSidebarProps) => 
 
                     {/* Navigation */}
                     <nav className="flex-1 space-y-1 p-2">
-                        {menuItems.map((item) => {
+                        {allMenuItems.map((item) => {
                             const Icon = item.icon
                             const isActive = pathname === item.href
 
@@ -77,11 +79,12 @@ export const DashboardSidebar = ({ isOpen, onClose }: DashboardSidebarProps) => 
                                     href={item.href}
                                     onClick={onClose}
                                     className={cn(
-                                        'flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors',
+                                        'flex items-center gap-3 px-3 py-2.5 text-sm font-medium transition-colors',
                                         'hover:bg-accent hover:text-accent-foreground',
                                         isActive
-                                            ? 'bg-primary text-primary-foreground hover:bg-primary/90'
-                                            : 'text-muted-foreground'
+                                            ? 'bg-primary/10 text-accent-foreground hover:bg-primary/25 border-l-2 border-primary'
+                                            : 'text-muted-foreground',
+                                        item.adminOnly && ''
                                     )}
                                 >
                                     <Icon className="h-5 w-5" />
@@ -92,8 +95,8 @@ export const DashboardSidebar = ({ isOpen, onClose }: DashboardSidebarProps) => 
                     </nav>
 
                     {/* Footer */}
-                    <div className="border-t p-2">
-                        <div className="rounded-lg bg-muted p-3">
+                    <div className="border-t flex py-2 px-3 flex-row justify-between items-center gap-2 bg-muted">
+                        <div className="">
                             <p className="text-xs text-muted-foreground">
                                 ProofBench
                             </p>
@@ -101,6 +104,20 @@ export const DashboardSidebar = ({ isOpen, onClose }: DashboardSidebarProps) => 
                                 Version 1.0.0
                             </p>
                         </div>
+
+                        <Link
+                            href="https://github.com/ELIGHT-GROUP"
+                            target='_blank'
+                            className="flex items-center gap-3 px-3 py-2.5 text-sm font-medium transition-colors"
+                        >
+                            <Image
+                                src="https://avatars.githubusercontent.com/u/197804864?s=200&v=4"
+                                alt="Elight-Group"
+                                width={40}
+                                height={40}
+                                className='rounded-full'
+                            />
+                        </Link>
                     </div>
                 </div>
             </aside>

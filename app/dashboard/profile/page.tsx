@@ -7,7 +7,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 
 export default function ProfilePage() {
-  const { user } = useAuth()
+  const { user, profile } = useAuth()
 
   // Get user initials for avatar fallback
   const getUserInitials = () => {
@@ -54,6 +54,7 @@ export default function ProfilePage() {
                     {user?.user_metadata?.full_name || 'User'}
                   </h3>
                   <p className="text-sm text-muted-foreground">{user?.email}</p>
+                  <p className="text-sm text-muted-foreground">{profile?.role}</p>
                 </div>
               </div>
 
@@ -78,11 +79,6 @@ export default function ProfilePage() {
                 </div>
               </div>
 
-              <div className="rounded-lg border bg-muted/50 p-4">
-                <p className="text-sm text-muted-foreground">
-                  Profile editing features coming soon...
-                </p>
-              </div>
             </CardContent>
           </Card>
         </div>

@@ -4,30 +4,12 @@ import { useAuth } from '@/contexts/auth'
 import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { Shield, ShieldCheck, User } from 'lucide-react'
+import { roleConfig } from '@/constants/roles'
 
 export function UserRoleBadge() {
     const { profile } = useAuth()
 
     if (!profile) return null
-
-    const roleConfig = {
-        superadmin: {
-            label: 'Super Admin',
-            icon: ShieldCheck,
-            className: 'bg-purple-500 text-white hover:bg-purple-600'
-        },
-        admin: {
-            label: 'Admin',
-            icon: Shield,
-            className: 'bg-blue-500 text-white hover:bg-blue-600'
-        },
-        student: {
-            label: 'Student',
-            icon: User,
-            className: 'bg-green-500 text-white hover:bg-green-600'
-        }
-    }
 
     const config = roleConfig[profile.role]
     const Icon = config.icon

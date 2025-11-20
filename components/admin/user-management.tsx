@@ -22,8 +22,9 @@ import {
     SelectValue,
 } from '@/components/ui/select'
 import { Badge } from '@/components/ui/badge'
-import { Shield, ShieldCheck, User, RefreshCw } from 'lucide-react'
+import { RefreshCw } from 'lucide-react'
 import { toast } from 'sonner'
+import { roleConfig } from '@/constants/roles'
 
 export function UserManagement() {
     const { profile, isSuperAdmin } = useAuth()
@@ -76,16 +77,12 @@ export function UserManagement() {
     }
 
     const getRoleBadge = (role: UserRole) => {
-        const config = {
-            superadmin: { label: 'Super Admin', icon: ShieldCheck, className: 'bg-purple-500 text-white' },
-            admin: { label: 'Admin', icon: Shield, className: 'bg-blue-500 text-white' },
-            student: { label: 'Student', icon: User, className: 'bg-green-500 text-white' }
-        }
-        const { label, icon: Icon, className } = config[role]
+        const config = roleConfig[role]
+        const Icon = config.icon
         return (
-            <Badge className={className}>
+            <Badge className={config.className}>
                 <Icon className="w-3 h-3 mr-1" />
-                {label}
+                {config.label}
             </Badge>
         )
     }

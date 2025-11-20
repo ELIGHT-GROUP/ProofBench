@@ -11,15 +11,18 @@ import {
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { useAuth } from '@/contexts/auth'
-import { LogOut, Menu } from 'lucide-react'
+import { useAdminMode } from '@/contexts/admin-mode'
+import { LogOut, Menu, Shield } from 'lucide-react'
 import { ThemeToggle } from '../shared/theme-toggle'
+import { cn } from '@/lib/utils'
 
 interface DashboardHeaderProps {
     onMenuClick: () => void
 }
 
 export const DashboardHeader = ({ onMenuClick }: DashboardHeaderProps) => {
-    const { user, signOut } = useAuth()
+    const { user, signOut, isAdmin, isSuperAdmin } = useAuth()
+    const { adminModeEnabled, toggleAdminMode, canAccessAdminMode } = useAdminMode()
 
     // Get user initials for avatar fallback
     const getUserInitials = () => {
@@ -51,6 +54,23 @@ export const DashboardHeader = ({ onMenuClick }: DashboardHeaderProps) => {
 
                 {/* Theme Toggle  */}
                 <ThemeToggle />
+
+                {/* Admin Mode Toggle - Only visible to admins/superadmins */}
+                {canAccessAdminMode() && (
+                    <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={toggleAdminMode}
+                        title={adminModeEnabled ? "Disable Admin Mode" : "Enable Admin Mode"}
+
+                    >
+                        <Shield className={cn(
+                            "transition-all w-5 h-5",
+                            adminModeEnabled && "text-primary font-bold"
+                        )} />
+                    </Button>
+                )}
+
                 {/* User profile dropdown */}
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
