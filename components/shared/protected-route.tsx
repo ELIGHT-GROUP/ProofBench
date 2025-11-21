@@ -4,7 +4,8 @@ import { useAuth } from '@/contexts/auth'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 import PageLoader from './PageLoader'
-import { UserRole } from '@/lib/supabase/types'
+import { UserRole } from '@/lib/supabase/profiles'
+
 
 interface ProtectedRouteProps {
   children: React.ReactNode

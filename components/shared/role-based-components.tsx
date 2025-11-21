@@ -5,13 +5,14 @@ import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { roleConfig } from '@/constants/roles'
+import { UserRole } from '@/lib/supabase/profiles'
 
 export function UserRoleBadge() {
     const { profile } = useAuth()
 
     if (!profile) return null
 
-    const config = roleConfig[profile.role]
+    const config = roleConfig[profile.role as UserRole]
     const Icon = config.icon
 
     return (

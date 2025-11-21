@@ -592,7 +592,7 @@ export async function getCourseProgress(
 
   const totalVideos = videos?.length || 0;
 
-  if (!user || totalVideos === 0) {
+  if (!user || !videos || totalVideos === 0) {
     return {
       ...course,
       total_videos: totalVideos,

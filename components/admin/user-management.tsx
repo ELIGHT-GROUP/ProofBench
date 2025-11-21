@@ -2,8 +2,7 @@
 
 import { useEffect, useState, useMemo } from 'react'
 import { useAuth } from '@/contexts/auth'
-import { UserProfile, UserRole } from '@/lib/supabase/types'
-import { getAllUsers, updateUserRole } from '@/lib/supabase/profiles'
+import { getAllUsers, updateUserRole, UserProfile, UserRole } from '@/lib/supabase/profiles'
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
