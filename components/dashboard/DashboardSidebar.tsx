@@ -28,10 +28,10 @@ export const DashboardSidebar = ({ isOpen, onClose }: DashboardSidebarProps) => 
         return hasRole(item.requiredRoles)
     })
 
-    // Combine menu items: regular items + admin items (if admin mode is enabled)
+    // Show ONLY admin sections when in admin mode, ONLY student sections when in student mode
     const allMenuItems = adminModeEnabled
-        ? [...menuItems, ...visibleAdminItems]
-        : menuItems
+        ? visibleAdminItems  // Admin mode: show only admin sections
+        : menuItems          // Student mode: show only student sections
 
     return (
         <>

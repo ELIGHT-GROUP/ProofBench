@@ -21,8 +21,17 @@ export function AdminModeProvider({ children }: { children: ReactNode }) {
     useEffect(() => {
         if (typeof window !== 'undefined') {
             const stored = localStorage.getItem(ADMIN_MODE_STORAGE_KEY)
-            if (stored === 'true' && (isAdmin() || isSuperAdmin())) {
-                setAdminModeEnabled(true)
+
+            // If user can access admin mode
+            if (isAdmin() || isSuperAdmin()) {
+                // If no stored preference, default to admin mode (true)
+                // Otherwise use stored preference
+                if (stored === null) {
+                    setAdminModeEnabled(true)
+                    localStorage.setItem(ADMIN_MODE_STORAGE_KEY, 'true')
+                } else {
+                    setAdminModeEnabled(stored === 'true')
+                }
             }
         }
     }, [isAdmin, isSuperAdmin])
