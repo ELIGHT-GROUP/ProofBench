@@ -19,21 +19,21 @@ export interface DashboardMenuItem {
 }
 
 export const menuItems: DashboardMenuItem[] = [
-  {
-    title: "Dashboard",
-    href: "/dashboard",
-    icon: Home,
-  },
+  // {
+  //   title: "Dashboard",
+  //   href: "/dashboard",
+  //   icon: Home,
+  // },
   {
     title: "Courses",
     href: "/dashboard/courses",
     icon: GraduationCap,
   },
-  {
-    title: "Test",
-    href: "/dashboard/test",
-    icon: FileText,
-  },
+  // {
+  //   title: "Test",
+  //   href: "/dashboard/test",
+  //   icon: FileText,
+  // },
   {
     title: "Profile",
     href: "/dashboard/profile",

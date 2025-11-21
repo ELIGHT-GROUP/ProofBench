@@ -151,65 +151,65 @@ export function SectionManager({ courseId, sections: initialSections }: SectionM
                     <Accordion type="multiple" defaultValue={sections.map(s => s.id)}>
                         {sections.map((section, index) => (
                             <AccordionItem key={section.id} value={section.id}>
-                                <div className="flex items-center gap-2">
+                                <div className="flex items-center gap-2 pr-2">
                                     <GripVertical className="h-5 w-5 text-muted-foreground cursor-grab" />
-                                    <div className="flex-1">
-                                        <AccordionTrigger className="hover:no-underline">
-                                            {editingSectionId === section.id ? (
-                                                <div className="flex items-center gap-2 flex-1 pr-4" onClick={(e) => e.stopPropagation()}>
-                                                    <Input
-                                                        value={editingSectionName}
-                                                        onChange={(e) => setEditingSectionName(e.target.value)}
-                                                        onKeyDown={(e) => {
-                                                            if (e.key === 'Enter') {
-                                                                handleUpdateSection(section.id, editingSectionName)
-                                                            } else if (e.key === 'Escape') {
-                                                                cancelEditing()
-                                                            }
-                                                        }}
-                                                        className="flex-1"
-                                                        autoFocus
-                                                    />
-                                                    <Button
-                                                        size="icon"
-                                                        variant="ghost"
-                                                        onClick={() => handleUpdateSection(section.id, editingSectionName)}
-                                                    >
-                                                        <Check className="h-4 w-4" />
-                                                    </Button>
-                                                    <Button
-                                                        size="icon"
-                                                        variant="ghost"
-                                                        onClick={cancelEditing}
-                                                    >
-                                                        <X className="h-4 w-4" />
-                                                    </Button>
-                                                </div>
-                                            ) : (
-                                                <div className="flex items-center justify-between w-full pr-4">
+                                    <div className="flex-1 flex items-center gap-2">
+                                        {editingSectionId === section.id ? (
+                                            <div className="flex items-center gap-2 flex-1 py-2">
+                                                <Input
+                                                    value={editingSectionName}
+                                                    onChange={(e) => setEditingSectionName(e.target.value)}
+                                                    onKeyDown={(e) => {
+                                                        if (e.key === 'Enter') {
+                                                            handleUpdateSection(section.id, editingSectionName)
+                                                        } else if (e.key === 'Escape') {
+                                                            cancelEditing()
+                                                        }
+                                                    }}
+                                                    className="flex-1"
+                                                    autoFocus
+                                                />
+                                                <Button
+                                                    size="icon"
+                                                    variant="ghost"
+                                                    onClick={() => handleUpdateSection(section.id, editingSectionName)}
+                                                >
+                                                    <Check className="h-4 w-4" />
+                                                </Button>
+                                                <Button
+                                                    size="icon"
+                                                    variant="ghost"
+                                                    onClick={cancelEditing}
+                                                >
+                                                    <X className="h-4 w-4" />
+                                                </Button>
+                                            </div>
+                                        ) : (
+                                            <>
+                                                <AccordionTrigger className="hover:no-underline flex-1 py-2">
                                                     <span className="font-medium">{section.name}</span>
-                                                    <div className="flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
-                                                        <span className="text-sm text-muted-foreground">
-                                                            {section.videos.length} videos
-                                                        </span>
-                                                        <Button
-                                                            size="icon"
-                                                            variant="ghost"
-                                                            onClick={() => startEditing(section)}
-                                                        >
-                                                            <Pencil className="h-4 w-4" />
-                                                        </Button>
-                                                        <Button
-                                                            size="icon"
-                                                            variant="ghost"
-                                                            onClick={() => openDeleteDialog(section)}
-                                                        >
-                                                            <Trash2 className="h-4 w-4 text-destructive" />
-                                                        </Button>
-                                                    </div>
+                                                </AccordionTrigger>
+                                                <div className="flex items-center gap-2">
+                                                    <span className="text-sm text-muted-foreground">
+                                                        {section.videos.length} videos
+                                                    </span>
+                                                    <Button
+                                                        size="icon"
+                                                        variant="ghost"
+                                                        onClick={() => startEditing(section)}
+                                                    >
+                                                        <Pencil className="h-4 w-4" />
+                                                    </Button>
+                                                    <Button
+                                                        size="icon"
+                                                        variant="ghost"
+                                                        onClick={() => openDeleteDialog(section)}
+                                                    >
+                                                        <Trash2 className="h-4 w-4 text-destructive" />
+                                                    </Button>
                                                 </div>
-                                            )}
-                                        </AccordionTrigger>
+                                            </>
+                                        )}
                                     </div>
                                 </div>
                                 <AccordionContent>

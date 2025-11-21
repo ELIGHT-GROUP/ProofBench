@@ -34,7 +34,7 @@ export function CourseCard({ course }: CourseCardProps) {
             onClick={() => router.push(`/dashboard/courses/${course.id}`)}
         >
             {/* Thumbnail */}
-            <div className="relative h-48 w-full overflow-hidden bg-muted">
+            <div className="relative h-56 w-full overflow-hidden bg-muted">
                 {course.thumbnail_url ? (
                     <Image
                         src={course.thumbnail_url}

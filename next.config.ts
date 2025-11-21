@@ -1,12 +1,15 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
   images: {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "avatars.githubusercontent.com",
+        hostname: "**", // allow ALL HTTPS domains
+      },
+      {
+        protocol: "http",
+        hostname: "**", // allow ALL HTTP domains (optional)
       },
     ],
   },
