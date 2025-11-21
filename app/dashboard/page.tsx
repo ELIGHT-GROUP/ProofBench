@@ -1,16 +1,18 @@
-'use client'
+"use client"
 
-import { ProtectedRoute } from '@/components/shared/protected-route'
-import { DashboardLayout } from '@/components/dashboard/DashboardLayout'
+import { useAuth } from "@/contexts/auth"
+
+
 
 export default function DashboardPage() {
+  const { profile } = useAuth()
 
 
   return (
-    <ProtectedRoute>
-      <DashboardLayout>
-        <></>
-      </DashboardLayout>
-    </ProtectedRoute>
+
+    <>
+      { JSON.stringify(profile) }
+    </>
+
   )
 }

@@ -1,7 +1,6 @@
 'use client'
 
-import { ProtectedRoute } from '@/components/shared/protected-route'
-import { DashboardLayout } from '@/components/dashboard/DashboardLayout'
+
 import { useAuth } from '@/contexts/auth'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -21,8 +20,7 @@ export default function ProfilePage() {
   }
 
   return (
-    <ProtectedRoute>
-      <DashboardLayout>
+
         <div className="space-y-6">
           <div>
             <h1 className="text-3xl font-bold tracking-tight">Profile</h1>
@@ -82,7 +80,6 @@ export default function ProfilePage() {
             </CardContent>
           </Card>
         </div>
-      </DashboardLayout>
-    </ProtectedRoute>
+
   )
 }

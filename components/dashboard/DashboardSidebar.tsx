@@ -9,7 +9,6 @@ import Logo from '@/components/shared/Logo'
 import { useAdminMode } from '@/contexts/admin-mode'
 import { useAuth } from '@/contexts/auth'
 import { menuItems, adminMenuItems } from '@/constants/dashboard'
-import { Badge } from '@/components/ui/badge'
 import Image from 'next/image'
 
 interface DashboardSidebarProps {

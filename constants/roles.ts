@@ -1,4 +1,5 @@
-import { UserRole } from "@/lib/supabase/types";
+import { UserRole } from "@/lib/supabase/profiles";
+
 import { Shield, ShieldCheck, User, LucideIcon } from "lucide-react";
 
 export interface RoleConfig {
