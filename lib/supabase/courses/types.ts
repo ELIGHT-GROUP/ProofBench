@@ -150,3 +150,40 @@ export interface CourseFilters {
   search?: string;
   created_by?: string;
 }
+
+// ============================================
+// Comment types
+// ============================================
+
+export interface VideoComment {
+  id: string;
+  video_id: string;
+  user_id: string;
+  parent_id: string | null;
+  content: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface VideoCommentWithUser extends VideoComment {
+  user: {
+    id: string;
+    full_name: string | null;
+    avatar_url: string | null;
+    role: "student" | "admin" | "superadmin";
+  };
+}
+
+export interface VideoCommentWithReplies extends VideoCommentWithUser {
+  replies: VideoCommentWithUser[];
+}
+
+// Form data types for comments
+export interface CreateCommentData {
+  content: string;
+  parent_id?: string;
+}
+
+export interface UpdateCommentData {
+  content: string;
+}

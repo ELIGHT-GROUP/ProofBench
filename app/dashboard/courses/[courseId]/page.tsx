@@ -9,7 +9,7 @@ import type { CourseWithSections, VideoWithProgress } from '@/lib/supabase/cours
 import { Skeleton } from '@/components/ui/skeleton'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { AlertCircle } from 'lucide-react'
-import { CoursePlaylist, VideoPlayer, VideoResources } from '@/components/courses'
+import { CoursePlaylist, VideoPlayer, VideoResources, CommentSection } from '@/components/courses'
 
 export default function CourseDetailPage() {
     const params = useParams()
@@ -110,6 +110,9 @@ export default function CourseDetailPage() {
                             {currentVideo.resources && currentVideo.resources.length > 0 && (
                                 <VideoResources resources={currentVideo.resources} />
                             )}
+
+                            {/* Comment Section */}
+                            <CommentSection videoId={currentVideo.id} />
                         </>
                     ) : (
                         <div className="aspect-video rounded-lg border-2 border-dashed border-muted flex items-center justify-center">

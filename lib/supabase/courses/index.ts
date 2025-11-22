@@ -20,6 +20,11 @@ export type {
   CreateVideoResourceData,
   UpdateVideoProgressData,
   CourseFilters,
+  VideoComment,
+  VideoCommentWithUser,
+  VideoCommentWithReplies,
+  CreateCommentData,
+  UpdateCommentData,
 } from "./types";
 
 // Export course management functions
@@ -60,3 +65,11 @@ export {
   getCoursesWithProgress,
   getContinueWatchingCourses,
 } from "./progress-api";
+
+// Export comment functions
+export {
+  getVideoComments,
+  createComment,
+  updateComment,
+  deleteComment,
+} from "./comments-api";
