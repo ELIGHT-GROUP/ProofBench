@@ -70,7 +70,7 @@ export const DashboardSidebar = ({ isOpen, onClose }: DashboardSidebarProps) => 
                     <nav className="flex-1 space-y-1 p-2">
                         {allMenuItems.map((item) => {
                             const Icon = item.icon
-                            const isActive = pathname === item.href
+                            const isActive = pathname === item.href || pathname.startsWith(item.href + '/')
 
                             return (
                                 <Link
