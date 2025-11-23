@@ -43,13 +43,6 @@ export const menuItems: DashboardMenuItem[] = [
 
 export const adminMenuItems: DashboardMenuItem[] = [
   {
-    title: "Dashboard",
-    href: "/dashboard",
-    icon: Home,
-    adminOnly: true,
-    requiredRoles: ["superadmin", "admin"],
-  },
-  {
     title: "Manage Courses",
     href: "/dashboard/admin/courses",
     icon: BookOpen,

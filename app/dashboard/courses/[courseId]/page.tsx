@@ -1,18 +1,21 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { useParams } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 import { getCourseById } from '@/lib/supabase/courses'
 
 import type { CourseWithSections, VideoWithProgress } from '@/lib/supabase/courses/types'
 
 import { Skeleton } from '@/components/ui/skeleton'
 import { Alert, AlertDescription } from '@/components/ui/alert'
-import { AlertCircle } from 'lucide-react'
-import { CoursePlaylist, VideoPlayer, VideoResources, CommentSection } from '@/components/courses'
+import { Button } from '@/components/ui/button'
+import { AlertCircle, ArrowLeft } from 'lucide-react'
+import { CoursePlaylist, VideoResources, CommentSection } from '@/components/courses'
+import { VideoPlayer } from '@/components/courses/video-player'
 
 export default function CourseDetailPage() {
     const params = useParams()
+    const router = useRouter()
     const courseId = params.courseId as string
 
     const [course, setCourse] = useState<CourseWithSections | null>(null)
@@ -88,6 +91,16 @@ export default function CourseDetailPage() {
 
     return (
         <div className="container mx-auto px-4 py-8">
+            {/* Back Button */}
+            <Button
+                variant="ghost"
+                onClick={() => router.push('/dashboard/courses')}
+                className="mb-4"
+            >
+                <ArrowLeft className="h-4 w-4 mr-2" />
+                Back to Courses
+            </Button>
+
             {/* Course Header */}
             <div className="mb-6">
                 <h1 className="text-3xl font-bold mb-2">{course.title}</h1>

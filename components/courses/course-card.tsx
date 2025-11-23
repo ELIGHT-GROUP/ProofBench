@@ -30,7 +30,7 @@ export function CourseCard({ course }: CourseCardProps) {
 
     return (
         <Card
-            className="group cursor-pointer hover:shadow-lg transition-all duration-300 overflow-hidden"
+            className="group cursor-pointer hover:shadow-lg transition-all duration-300 overflow-hidden pt-0"
             onClick={() => router.push(`/dashboard/courses/${course.id}`)}
         >
             {/* Thumbnail */}

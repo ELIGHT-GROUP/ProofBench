@@ -21,7 +21,7 @@ interface DashboardHeaderProps {
 }
 
 export const DashboardHeader = ({ onMenuClick }: DashboardHeaderProps) => {
-    const { user, signOut, isAdmin, isSuperAdmin } = useAuth()
+    const { user, signOut } = useAuth()
     const { adminModeEnabled, toggleAdminMode, canAccessAdminMode } = useAdminMode()
 
     // Get user initials for avatar fallback
