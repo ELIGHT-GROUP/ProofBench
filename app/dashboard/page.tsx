@@ -1,13 +1,13 @@
 "use client"
 
-import { useAuth } from "@/contexts/auth"
+// import { useAuth } from "@/contexts/auth"
 import { useRouter } from "next/navigation"
 import { useEffect } from "react"
 
 
 
 export default function DashboardPage() {
-  const { profile } = useAuth()
+  // const { profile } = useAuth()
 
   const router = useRouter()
   useEffect(() => {
@@ -15,9 +15,5 @@ export default function DashboardPage() {
   }, [router])
 
 
-  return (
-    <>
-      {JSON.stringify(profile)}
-    </>
-  )
+  return null
 }
