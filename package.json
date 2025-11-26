@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "tauri": "tauri dev",
+    "tauri:build": "tauri build",
+    "tauri:icon": "tauri icon ./public/icon.png"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
@@ -60,6 +63,7 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@tauri-apps/cli": "^2.9.4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

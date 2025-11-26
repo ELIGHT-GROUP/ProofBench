@@ -1,18 +1,24 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  trailingSlash: true,
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "**", // allow ALL HTTPS domains
+        hostname: "**", 
       },
       {
         protocol: "http",
-        hostname: "**", // allow ALL HTTP domains (optional)
+        hostname: "**", 
       },
     ],
   },
+  basePath: '',
+  assetPrefix: '',
+  reactStrictMode: true,
 };
 
 export default nextConfig;
+
