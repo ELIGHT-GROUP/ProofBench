@@ -1,25 +1,36 @@
 [package]
 name = "proofbench"
 version = "0.1.0"
-description = "A Tauri App"
-authors = ["you"]
-license = ""
-repository = ""
+description = "ProofBench – Next.js + Tauri Desktop App"
+authors = ["Oshana Vishka <oshanavishkapiries@users.noreply.github.com>"]
+license = "MIT"
+repository = "https://github.com/oshanavishkapiries/ProofBench"
 edition = "2021"
 rust-version = "1.77.2"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
 [lib]
-name = "app_lib"
+name = "proofbench_lib"
 crate-type = ["staticlib", "cdylib", "rlib"]
 
 [build-dependencies]
-tauri-build = { version = "2.5.1", features = [] }
+tauri-build = { version = "2", features = [] }
 
 [dependencies]
 serde_json = "1.0"
 serde = { version = "1.0", features = ["derive"] }
 log = "0.4"
-tauri = { version = "2.9.2", default-features = false, features = ["linux-protocol", "updater", "webkit2gtk-6-0"] }
-tauri-plugin-log = "2.0.4"
+
+tauri = { 
+  version = "2", 
+  default-features = false, 
+  features = [
+    "protocol-asset",     # Replaces the old/invalid "linux-protocol"
+    "updater",            # Auto-updates
+    "tray-icon",          # System tray support
+    "shell-open",         # Open files/folders with default app
+    "notification",       # System notifications
+    "webkit2gtk-6-0"      # Headless-safe webview for Linux CI
+  ]
+}
+
+tauri-plugin-log = "2"

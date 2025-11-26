@@ -1,5 +1,6 @@
 name: ProofBench
 
+# Run only when pushing a vX.Y.Z tag to main branch
 on:
   push:
     tags:
@@ -7,6 +8,7 @@ on:
     branches:
       - main
 
+# Allow creating releases
 permissions:
   contents: write
 
@@ -19,42 +21,50 @@ jobs:
 
     runs-on: ${{ matrix.platform }}
 
+    # Environment variables from GitHub Secrets
     env:
       NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
       NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
 
     steps:
+      # Checkout full history (needed for tags)
       - name: Checkout code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
+      # Setup Node.js 20 with npm cache
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
 
+      # Install npm dependencies
       - name: Install dependencies
         run: npm ci
 
+      # Install stable Rust toolchain
       - name: Setup Rust
         uses: dtolnay/rust-toolchain@stable
 
+      # Install Linux system dependencies (headless-safe, no display needed)
       - name: Install Linux dependencies (headless-safe)
         if: runner.os == 'Linux'
         run: |
           sudo apt update -y
           sudo apt install -y \
-            libwebkit2gtk-6.0-dev \
+            libwebkitgtk-6.0-dev \
             libgtk-4-dev \
             libayatana-appindicator3-dev \
             librsvg2-dev \
             patchelf
 
+      # Build Next.js production app
       - name: Build Next.js
         run: npm run build
 
+      # Build Tauri app and upload to GitHub Release
       - name: Build & Release Tauri
         uses: tauri-apps/tauri-action@v0
         env:

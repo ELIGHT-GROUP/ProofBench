@@ -18,6 +18,7 @@ const nextConfig: NextConfig = {
   basePath: '',
   assetPrefix: '',
   reactStrictMode: true,
+  telemetry: false,
 };
 
 export default nextConfig;
